@@ -604,6 +604,31 @@ footer {
 .profile-movies .title-row h2 {
   margin-top: 35px;
 }
+.profile-movies .video-grid.movie-count-1 {
+  grid-template-columns: minmax(0, 720px);
+}
+.profile-movies .video-grid.movie-count-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+.video-empty {
+  grid-column: 1 / -1;
+  min-height: 220px;
+  padding: 35px;
+  border: 2px dashed var(--ink);
+  background: #fffdf1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.video-empty p {
+  letter-spacing: 0.18em;
+}
+.video-empty h3 {
+  margin: 12px 0;
+}
+.video-empty span {
+  line-height: 1.8;
+}
 .tag-list {
   display: flex;
   flex-wrap: wrap;
@@ -687,6 +712,9 @@ footer {
   }
   .profile-movies {
     padding: 85px 22px;
+  }
+  .profile-movies .video-grid.movie-count-2 {
+    grid-template-columns: 1fr;
   }
   .short-frame {
     max-width: 280px;
