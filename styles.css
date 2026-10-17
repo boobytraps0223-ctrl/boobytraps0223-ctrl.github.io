@@ -768,6 +768,109 @@ footer {
     radial-gradient(circle at 12px 12px, color-mix(in srgb, var(--member) 22%, transparent) 2px, transparent 3px) 0 0 / 24px 24px,
     #fffaf0;
 }
+.birthday-event::before {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: -25%;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 7%, color-mix(in srgb, var(--member) 92%, white) 22%, color-mix(in srgb, var(--member) 58%, transparent) 44%, transparent 68%);
+  opacity: 0;
+  transform: scale(.15);
+  pointer-events: none;
+}
+.birthday-event.is-complete::before {
+  animation: birthdayFeverGlow 1.75s cubic-bezier(.14,.85,.28,1) both;
+}
+.birthday-intro {
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #050705;
+  color: white;
+  pointer-events: none;
+  animation: birthdayIntroHide 1.7s ease both;
+}
+.birthday-intro::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -18%;
+  width: min(90vw, 920px);
+  height: 125%;
+  background: linear-gradient(105deg, transparent 13%, color-mix(in srgb, var(--member) 45%, white) 49%, transparent 83%);
+  clip-path: polygon(43% 0, 57% 0, 100% 100%, 0 100%);
+  opacity: 0;
+  transform: translateX(-50%) scaleX(.08);
+  transform-origin: 50% 0;
+  animation: birthdayBeam 1.18s .08s cubic-bezier(.16,.84,.3,1) both;
+}
+.birthday-intro-spotlight {
+  position: absolute;
+  width: 20vmin;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 8%, color-mix(in srgb, var(--member) 88%, white) 24%, var(--member) 45%, transparent 71%);
+  filter: blur(4px);
+  animation: birthdaySpotlight 1.3s .06s cubic-bezier(.12,.85,.25,1) both;
+}
+.birthday-intro-copy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  gap: 18px;
+  text-align: center;
+  text-shadow: 0 5px 0 #111, 0 0 28px var(--member);
+  animation: birthdayTitlePop 1.45s .14s cubic-bezier(.16,.94,.32,1.18) both;
+}
+.birthday-intro-copy small {
+  font-size: clamp(12px, 1.5vw, 18px);
+  font-weight: 950;
+  letter-spacing: .2em;
+}
+.birthday-intro-copy strong {
+  display: grid;
+  font-size: clamp(62px, 13vw, 180px);
+  font-style: italic;
+  font-weight: 950;
+  line-height: .76;
+  letter-spacing: -.075em;
+}
+.birthday-intro-copy strong span:last-child {
+  color: var(--member);
+  -webkit-text-stroke: 2px white;
+}
+.birthday-fever {
+  position: absolute;
+  z-index: 7;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  gap: 12px;
+  padding: 22px;
+  color: white;
+  text-align: center;
+  text-shadow: 0 4px 0 var(--ink), 0 0 24px var(--member);
+  opacity: 0;
+  pointer-events: none;
+}
+.birthday-fever strong {
+  font-size: clamp(50px, 11vw, 150px);
+  font-style: italic;
+  font-weight: 950;
+  line-height: .82;
+  letter-spacing: -.065em;
+}
+.birthday-fever span {
+  font-size: clamp(22px, 4vw, 50px);
+  font-weight: 950;
+}
+.birthday-event.is-complete .birthday-fever {
+  animation: birthdayFeverTitle 1.65s cubic-bezier(.16,.9,.3,1.15) both;
+}
 .birthday-heading {
   position: relative;
   z-index: 3;
@@ -1056,15 +1159,15 @@ footer {
 }
 .birthday-confetti {
   position: absolute;
-  z-index: 3;
+  z-index: 6;
   inset: 0;
   overflow: hidden;
   pointer-events: none;
 }
 .birthday-confetti i {
   position: absolute;
-  top: -25px;
-  left: var(--x);
+  top: 50%;
+  left: 50%;
   width: 11px;
   height: 22px;
   border: 1px solid var(--ink);
@@ -1093,8 +1196,42 @@ footer {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
 @keyframes birthdayConfetti {
-  0% { opacity: 1; transform: translateY(-5px) rotate(0deg); }
-  100% { opacity: 1; transform: translateY(850px) rotate(var(--spin)); }
+  0% { opacity: 0; transform: translate(-50%, -50%) scale(.15) rotate(0deg); }
+  8% { opacity: 1; }
+  55% { opacity: 1; transform: translate(calc(-50% + var(--burst-x)), calc(-50% + var(--burst-y))) scale(1.05) rotate(var(--spin)); }
+  100% { opacity: 0; transform: translate(calc(-50% + var(--burst-x)), calc(-50% + var(--burst-y) + var(--fall))) scale(.78) rotate(var(--spin)); }
+}
+@keyframes birthdayBeam {
+  0% { opacity: 0; transform: translateX(-50%) scaleX(.04); }
+  35% { opacity: .65; }
+  100% { opacity: .9; transform: translateX(-50%) scaleX(1); }
+}
+@keyframes birthdaySpotlight {
+  0% { opacity: 0; transform: scale(.12); }
+  35% { opacity: 1; }
+  100% { opacity: .9; transform: scale(9); }
+}
+@keyframes birthdayTitlePop {
+  0% { opacity: 0; transform: scale(.2) rotate(-5deg); }
+  42% { opacity: 1; transform: scale(1.12) rotate(1deg); }
+  68% { transform: scale(.98) rotate(0); }
+  100% { opacity: 1; transform: scale(1); }
+}
+@keyframes birthdayIntroHide {
+  0%, 76% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+@keyframes birthdayFeverGlow {
+  0% { opacity: 0; transform: scale(.15); }
+  28% { opacity: .96; transform: scale(1); }
+  67% { opacity: .48; transform: scale(1.24); }
+  100% { opacity: 0; transform: scale(1.45); }
+}
+@keyframes birthdayFeverTitle {
+  0% { opacity: 0; transform: scale(.2) rotate(-6deg); }
+  22% { opacity: 1; transform: scale(1.1) rotate(1deg); }
+  56% { opacity: 1; transform: scale(1); }
+  100% { opacity: 0; transform: scale(1.22); }
 }
 .profile-movies {
   padding: 100px 5vw;
@@ -1336,6 +1473,9 @@ footer {
   }
 }
 @media (prefers-reduced-motion: reduce) {
+  .birthday-intro {
+    display: none !important;
+  }
   * {
     animation: none !important;
     transition: none !important;
