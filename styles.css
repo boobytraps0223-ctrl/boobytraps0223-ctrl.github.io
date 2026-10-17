@@ -681,6 +681,8 @@ footer {
   background: var(--member);
   position: relative;
   overflow: hidden;
+  align-self: start;
+  height: max(600px, calc(100vh - 78px));
   min-height: 600px;
 }
 .profile-visual:after {
@@ -895,6 +897,7 @@ footer {
     display: block;
   }
   .profile-visual {
+    height: 520px;
     min-height: 520px;
   }
 }
