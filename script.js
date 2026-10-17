@@ -69,7 +69,15 @@ const isBirthdayEventDay = member => {
 const birthdaySection = member => {
   if (!isBirthdayEventDay(member)) return '';
   return `<section class="birthday-event" aria-labelledby="birthday-title">
+    <div class="birthday-intro" aria-hidden="true">
+      <div class="birthday-intro-spotlight"></div>
+      <div class="birthday-intro-copy">
+        <small>${member.birthday} · ${member.name}</small>
+        <strong><span>HAPPY</span><span>BIRTHDAY!</span></strong>
+      </div>
+    </div>
     <div class="birthday-confetti" aria-hidden="true"></div>
+    <div class="birthday-fever" aria-hidden="true"><strong>HAPPY BIRTHDAY!</strong><span>${member.name}</span></div>
     <div class="birthday-heading">
       <div>
         <p class="section-label">${member.roman} — BIRTHDAY EVENT</p>
@@ -156,13 +164,17 @@ const initBirthdayEvent = member => {
     mail.hidden = false;
     const confetti = event.querySelector('.birthday-confetti');
     const colors = [member.color, '#FFE500', '#7baa17', '#3864a2', '#e23d28', '#F79428', '#ffffff'];
-    confetti.innerHTML = Array.from({length: 48}, (_, index) => {
-      const left = Math.random() * 100;
-      const delay = Math.random() * 0.7;
-      const duration = 2.2 + Math.random() * 1.5;
-      const rotate = 180 + Math.random() * 720;
+    confetti.innerHTML = Array.from({length: 76}, (_, index) => {
+      const angle = Math.random() * Math.PI * 2;
+      const distance = 190 + Math.random() * 520;
+      const burstX = Math.cos(angle) * distance;
+      const burstY = Math.sin(angle) * distance * .62;
+      const fall = 230 + Math.random() * 440;
+      const delay = Math.random() * .14;
+      const duration = 1.7 + Math.random() * 1.2;
+      const rotate = 360 + Math.random() * 900;
       const color = colors[index % colors.length];
-      return `<i style="--x:${left}%;--delay:${delay}s;--duration:${duration}s;--spin:${rotate}deg;--confetti:${color}"></i>`;
+      return `<i style="--burst-x:${burstX}px;--burst-y:${burstY}px;--fall:${fall}px;--delay:${delay}s;--duration:${duration}s;--spin:${rotate}deg;--confetti:${color}"></i>`;
     }).join('');
     [523, 659, 784, 1047].forEach((frequency, index) => tone(frequency, 0.28, index * 0.11));
     setTimeout(() => mail.scrollIntoView({behavior: 'smooth', block: 'center'}), 280);
