@@ -736,6 +736,25 @@ footer {
   font-size: 17px;
   line-height: 2;
 }
+.profile-copy .profile-birthday {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: fit-content;
+  margin: 18px 0 24px;
+  padding: 9px 15px;
+  border: 1px solid var(--member);
+  background: color-mix(in srgb, var(--member) 12%, white);
+  line-height: 1.2;
+}
+.profile-birthday span {
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+.profile-birthday strong {
+  font-size: 17px;
+}
 .profile-movies {
   padding: 100px 5vw;
   background: #fff3a8;
