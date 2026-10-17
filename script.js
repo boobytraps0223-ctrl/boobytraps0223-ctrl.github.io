@@ -75,7 +75,7 @@ const birthdaySection = member => {
         <p class="section-label">${member.roman} — BIRTHDAY EVENT</p>
         <h2 id="birthday-title">MAKE A WISH!</h2>
       </div>
-      <button class="birthday-sound" type="button" aria-pressed="false" aria-label="誕生日イベントの音をオンにする"><span aria-hidden="true">🔇</span> SOUND OFF</button>
+      <button class="birthday-sound" type="button" aria-pressed="true" aria-label="誕生日イベントの音をオフにする"><span aria-hidden="true">🔊</span> SOUND ON</button>
     </div>
     <div class="birthday-stage">
       <div class="birthday-copy">
@@ -97,7 +97,11 @@ const birthdaySection = member => {
         <div class="cake-plate"></div>
       </div>
     </div>
-    <div class="birthday-finale" hidden>
+    <div class="birthday-mail" hidden>
+      <span class="birthday-envelope" aria-hidden="true">✉</span>
+      <button class="birthday-message-open" type="button">メッセージを開く</button>
+    </div>
+    <div class="birthday-finale" hidden aria-live="polite">
       <p>HAPPY BIRTHDAY!</p>
       <h3>${member.name}</h3>
       <span>${birthdayMessages[member.slug]}</span>
@@ -112,9 +116,11 @@ const initBirthdayEvent = member => {
 
   const soundButton = event.querySelector('.birthday-sound');
   const candles = [...event.querySelectorAll('.birthday-candle')];
+  const mail = event.querySelector('.birthday-mail');
+  const messageButton = event.querySelector('.birthday-message-open');
   const finale = event.querySelector('.birthday-finale');
   const prompt = event.querySelector('.birthday-prompt');
-  let soundOn = false;
+  let soundOn = true;
   let audioContext;
 
   const tone = (frequency, duration = 0.12, delay = 0) => {
@@ -146,8 +152,8 @@ const initBirthdayEvent = member => {
 
   const celebrate = () => {
     event.classList.add('is-complete');
-    prompt.textContent = '願いごと、届いたよ！';
-    finale.hidden = false;
+    prompt.textContent = 'メッセージが届いたよ！';
+    mail.hidden = false;
     const confetti = event.querySelector('.birthday-confetti');
     const colors = [member.color, '#FFE500', '#7baa17', '#3864a2', '#e23d28', '#F79428', '#ffffff'];
     confetti.innerHTML = Array.from({length: 48}, (_, index) => {
@@ -159,7 +165,16 @@ const initBirthdayEvent = member => {
       return `<i style="--x:${left}%;--delay:${delay}s;--duration:${duration}s;--spin:${rotate}deg;--confetti:${color}"></i>`;
     }).join('');
     [523, 659, 784, 1047].forEach((frequency, index) => tone(frequency, 0.28, index * 0.11));
+    setTimeout(() => mail.scrollIntoView({behavior: 'smooth', block: 'center'}), 280);
   };
+
+  messageButton.addEventListener('click', () => {
+    event.classList.add('is-message-open');
+    messageButton.hidden = true;
+    finale.hidden = false;
+    [784, 988, 1175].forEach((frequency, index) => tone(frequency, 0.32, index * 0.12));
+    finale.scrollIntoView({behavior: 'smooth', block: 'center'});
+  });
 
   candles.forEach(candle => candle.addEventListener('click', () => {
     if (candle.classList.contains('is-out')) return;
@@ -205,7 +220,7 @@ function route() {
   const next = members[(i + 1) % members.length];
   const links = [['X / TWITTER',m.x],['YOUTUBE',m.youtube],['TWITCH',m.twitch],['TIKTOK',m.tiktok],['INSTAGRAM',m.instagram],['SHOP',m.goods]].filter(x => x[1]);
   profile.style.setProperty('--member', m.color);
-  profile.innerHTML = `<header class="profile-nav"><a href="#members">← BOOBY TRAPS</a><span>${m.no} / 06</span></header><section class="profile-hero">${character(m,true)}<div class="profile-copy"><p class="kicker">BOOBY TRAPS MEMBER</p><h1>${m.roman}</h1><h2>${m.name}</h2><div class="color-line"></div><p class="profile-birthday"><span>BIRTHDAY</span><strong>${m.birthday}</strong></p><p>${m.bio}</p><div class="tag-list">${m.tags.map(t => `<span>#${t}</span>`).join('')}</div><div class="profile-links">${links.map(([label,href]) => `<a href="${href}" target="_blank" rel="noreferrer">${label}<b>↗</b></a>`).join('')}</div></div></section>${birthdaySection(m)}${moviesSection(m)}<section class="profile-bottom"><a href="#members">← 6人のメンバー一覧</a><a href="#member/${next.slug}">NEXT：${next.name} →</a></section>`;
+  profile.innerHTML = `<header class="profile-nav"><a href="#members">← BOOBY TRAPS</a><span>${m.no} / 06</span></header>${birthdaySection(m)}<section class="profile-hero">${character(m,true)}<div class="profile-copy"><p class="kicker">BOOBY TRAPS MEMBER</p><h1>${m.roman}</h1><h2>${m.name}</h2><div class="color-line"></div><p class="profile-birthday"><span>BIRTHDAY</span><strong>${m.birthday}</strong></p><p>${m.bio}</p><div class="tag-list">${m.tags.map(t => `<span>#${t}</span>`).join('')}</div><div class="profile-links">${links.map(([label,href]) => `<a href="${href}" target="_blank" rel="noreferrer">${label}<b>↗</b></a>`).join('')}</div></div></section>${moviesSection(m)}<section class="profile-bottom"><a href="#members">← 6人のメンバー一覧</a><a href="#member/${next.slug}">NEXT：${next.name} →</a></section>`;
   home.hidden = true;
   profile.hidden = false;
   initBirthdayEvent(m);
