@@ -758,6 +758,294 @@ footer {
 .profile-birthday strong {
   font-size: 17px;
 }
+.birthday-event {
+  position: relative;
+  overflow: hidden;
+  padding: 90px 5vw 72px;
+  border-top: 2px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
+  background:
+    radial-gradient(circle at 12px 12px, color-mix(in srgb, var(--member) 22%, transparent) 2px, transparent 3px) 0 0 / 24px 24px,
+    #fffaf0;
+}
+.birthday-heading {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+}
+.birthday-heading h2 {
+  margin: 26px 0 0;
+  font-size: clamp(54px, 8vw, 126px);
+  line-height: .82;
+  letter-spacing: -.07em;
+}
+.birthday-sound {
+  min-height: 48px;
+  padding: 0 18px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: white;
+  color: var(--ink);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 950;
+  cursor: pointer;
+  box-shadow: 4px 4px var(--ink);
+}
+.birthday-sound[aria-pressed="true"] {
+  background: var(--member);
+}
+.birthday-stage {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, .75fr) minmax(360px, 1.25fr);
+  align-items: center;
+  gap: 7vw;
+  max-width: 1180px;
+  margin: 45px auto 20px;
+}
+.birthday-copy {
+  padding: 30px 0;
+}
+.birthday-date {
+  width: fit-content;
+  margin: 0 0 24px;
+  padding: 8px 13px;
+  border: 2px solid var(--ink);
+  background: var(--member);
+  font-size: 11px;
+  font-weight: 950;
+  letter-spacing: .14em;
+  box-shadow: 5px 5px var(--ink);
+}
+.birthday-copy h3 {
+  margin: 0;
+  font-size: clamp(30px, 4vw, 58px);
+  line-height: 1.2;
+}
+.birthday-copy > p:last-child {
+  max-width: 440px;
+  margin-top: 20px;
+  line-height: 1.9;
+}
+.cake-wrap {
+  position: relative;
+  width: min(100%, 620px);
+  height: 450px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+.cake-layer {
+  position: relative;
+  z-index: 2;
+  border: 3px solid var(--ink);
+  background: #ffd7bc;
+  box-shadow: inset 0 -15px #f6b78f;
+}
+.cake-layer-top {
+  width: 58%;
+  height: 94px;
+  border-radius: 28px 28px 12px 12px;
+}
+.cake-layer-bottom {
+  width: 82%;
+  height: 126px;
+  margin-top: -2px;
+  border-radius: 28px 28px 16px 16px;
+}
+.cake-top {
+  position: absolute;
+  z-index: 5;
+  left: 21%;
+  bottom: 214px;
+  width: 58%;
+  height: 42px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--member) 72%, white);
+}
+.cake-top span {
+  position: absolute;
+  top: 13px;
+  width: 10px;
+  height: 10px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: white;
+}
+.cake-top span:nth-child(1) { left: 13%; }
+.cake-top span:nth-child(2) { left: 31%; }
+.cake-top span:nth-child(3) { left: 49%; }
+.cake-top span:nth-child(4) { left: 67%; }
+.cake-top span:nth-child(5) { left: 84%; }
+.cake-layer i {
+  position: absolute;
+  width: 8px;
+  height: 24px;
+  border: 1px solid var(--ink);
+  border-radius: 6px;
+  background: var(--member);
+  transform: rotate(28deg);
+}
+.cake-layer i:nth-child(1) { left: 14%; top: 48%; }
+.cake-layer i:nth-child(2) { left: 34%; top: 63%; transform: rotate(-24deg); }
+.cake-layer i:nth-child(3) { left: 54%; top: 44%; }
+.cake-layer i:nth-child(4) { left: 73%; top: 66%; transform: rotate(-24deg); }
+.cake-layer-bottom i:nth-child(5) { left: 88%; top: 38%; }
+.cake-plate {
+  z-index: 1;
+  width: 94%;
+  height: 30px;
+  margin-top: -3px;
+  border: 3px solid var(--ink);
+  border-radius: 50%;
+  background: white;
+  box-shadow: 0 10px 0 color-mix(in srgb, var(--member) 55%, white), 0 13px 0 1px var(--ink);
+}
+.cake-candles {
+  position: absolute;
+  z-index: 6;
+  left: 28%;
+  bottom: 245px;
+  width: 44%;
+  height: 145px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+}
+.birthday-candle {
+  position: relative;
+  width: 54px;
+  height: 142px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  touch-action: manipulation;
+}
+.candle-stick {
+  position: absolute;
+  left: 17px;
+  bottom: 0;
+  width: 20px;
+  height: 75px;
+  border: 2px solid var(--ink);
+  border-radius: 5px 5px 2px 2px;
+  background: repeating-linear-gradient(145deg, white 0 8px, var(--member) 8px 16px);
+}
+.candle-flame {
+  position: absolute;
+  left: 18px;
+  bottom: 80px;
+  width: 18px;
+  height: 30px;
+  border: 2px solid var(--ink);
+  border-radius: 55% 45% 55% 45%;
+  background: #ffb000;
+  box-shadow: inset 0 -9px #ff4f24, 0 0 17px #ffb000aa;
+  transform: rotate(45deg);
+  transform-origin: 50% 90%;
+  animation: birthdayFlame .75s ease-in-out infinite alternate;
+}
+.candle-smoke {
+  position: absolute;
+  left: 21px;
+  bottom: 92px;
+  width: 12px;
+  height: 12px;
+  border: 2px solid #777;
+  border-radius: 50%;
+  opacity: 0;
+}
+.birthday-candle.is-out .candle-flame {
+  display: none;
+}
+.birthday-candle.is-out .candle-smoke {
+  animation: birthdaySmoke 1.5s ease-out both;
+}
+.birthday-candle:focus-visible {
+  outline: 4px solid white;
+  outline-offset: 2px;
+  border-radius: 20px;
+}
+.birthday-finale {
+  position: relative;
+  z-index: 4;
+  max-width: 880px;
+  margin: 40px auto 15px;
+  padding: 34px clamp(22px, 5vw, 60px);
+  border: 3px solid var(--ink);
+  background: var(--member);
+  text-align: center;
+  box-shadow: 10px 11px var(--ink);
+}
+.birthday-finale p {
+  margin: 0;
+  font-size: clamp(36px, 7vw, 90px);
+  font-weight: 950;
+  line-height: .9;
+  letter-spacing: -.05em;
+}
+.birthday-finale h3 {
+  margin: 24px 0 14px;
+  font-size: clamp(28px, 4vw, 50px);
+}
+.birthday-finale span {
+  display: block;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.8;
+}
+.birthday-note {
+  position: relative;
+  z-index: 3;
+  margin: 34px 0 0;
+  text-align: center;
+  font-size: 10px;
+  font-weight: 900;
+  letter-spacing: .16em;
+}
+.birthday-confetti {
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.birthday-confetti i {
+  position: absolute;
+  top: -25px;
+  left: var(--x);
+  width: 11px;
+  height: 22px;
+  border: 1px solid var(--ink);
+  background: var(--confetti);
+  opacity: 0;
+}
+.birthday-event.is-complete .birthday-confetti i {
+  animation: birthdayConfetti var(--duration) var(--delay) cubic-bezier(.2,.75,.35,1) forwards;
+}
+@keyframes birthdayFlame {
+  0% { transform: rotate(42deg) scale(.92, 1.05); }
+  50% { transform: rotate(47deg) scale(1.08, .95); }
+  100% { transform: rotate(40deg) scale(.98, 1.1); }
+}
+@keyframes birthdaySmoke {
+  0% { opacity: .7; transform: translateY(0) scale(.55); }
+  55% { opacity: .45; transform: translate(8px, -32px) scale(1.2); }
+  100% { opacity: 0; transform: translate(-5px, -70px) scale(2.1); }
+}
+@keyframes birthdayConfetti {
+  0% { opacity: 1; transform: translateY(-5px) rotate(0deg); }
+  100% { opacity: 1; transform: translateY(850px) rotate(var(--spin)); }
+}
 .profile-movies {
   padding: 100px 5vw;
   background: #fff3a8;
@@ -888,6 +1176,27 @@ footer {
   .profile-movies {
     padding: 85px 22px;
   }
+  .birthday-event {
+    padding: 75px 22px 60px;
+  }
+  .birthday-stage {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+  .birthday-copy {
+    text-align: center;
+  }
+  .birthday-date {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .birthday-copy > p:last-child {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cake-wrap {
+    height: 420px;
+  }
   .profile-movies .video-grid.movie-count-2 {
     grid-template-columns: 1fr;
   }
@@ -947,6 +1256,30 @@ footer {
   }
   .profile-copy h1 {
     font-size: 16vw;
+  }
+  .birthday-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .birthday-heading h2 {
+    font-size: 18vw;
+  }
+  .birthday-sound {
+    align-self: flex-end;
+  }
+  .cake-wrap {
+    width: 112%;
+    height: 360px;
+    margin-left: -6%;
+  }
+  .cake-candles {
+    bottom: 212px;
+  }
+  .cake-top {
+    bottom: 181px;
+  }
+  .birthday-finale {
+    margin-right: 6px;
   }
   .profile-bottom {
     gap: 20px;
