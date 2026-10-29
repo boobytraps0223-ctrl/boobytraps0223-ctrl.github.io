@@ -66,6 +66,13 @@ const isBirthdayEventDay = member => {
   return birthday && birthday.month === today.month && birthday.day === today.day;
 };
 
+const rukaLetters = [
+  {name:'しょ〜ゆ', color:'#3864a2', text:'毎日楽しく生きろ！！'},
+  {name:'ふまふま。', color:'#7baa17', text:'素敵な歌声をこれからも世界に届けてください🎂🎉🎊'},
+  {name:'ぽけぷりん', color:'#FFE500', text:'サプライズどうかな？\nhappyな日になりますように💛'},
+  {name:'黒ヤン', color:'#F79428', text:'今日の主役は…君だ！！'},
+  {name:'おらんじ〜な', color:'#CC4F33', text:'素敵な一年にするんだよ〜！'}
+];
 const birthdaySection = member => {
   if (!isBirthdayEventDay(member)) return '';
   return `<section class="birthday-event" aria-labelledby="birthday-title">
@@ -91,7 +98,8 @@ const birthdaySection = member => {
         <h3 class="birthday-prompt">ろうそくをタップしてね！</h3>
         <p>3本のろうそくを、ひとつずつ消してお祝いしよう。</p>
       </div>
-      <div class="cake-wrap" aria-label="${member.name}の誕生日ケーキ">
+      <div class="cake-wrap ${member.slug === 'ruka' ? 'cake-ruka' : ''}" aria-label="${member.name}の誕生日ケーキ">
+        ${member.slug === 'ruka' ? '<img class="ruka-cake-image" src="assets/ruka-birthday-cake.png" alt="RUKAPINOPIの名前入りケーキ">' : ''}
         <div class="cake-candles">
           ${[1,2,3].map(number => `<button class="birthday-candle" type="button" aria-label="${number}本目のろうそくを消す">
             <span class="candle-smoke" aria-hidden="true"></span>
@@ -105,9 +113,10 @@ const birthdaySection = member => {
         <div class="cake-plate"></div>
       </div>
     </div>
-    <div class="birthday-mail" hidden>
+    <div class="birthday-mail ${member.slug === 'ruka' ? 'birthday-letters' : ''}" hidden>
+      ${member.slug === 'ruka' ? `<h3 class="letters-title">HAPPY BIRTHDAY!</h3><p class="letters-recipient">るかぴのぴへ</p><p>メンバーから手紙が届いたよ！<br>封筒をタップして開けてね。</p><div class="letters-grid">${rukaLetters.map((letter, index) => `<details class="member-letter" style="--sender:${letter.color};--arrival:${index * .12}s"><summary><span class="letter-envelope" aria-hidden="true">✉</span><strong>${letter.name}</strong><small>手紙を開く / 閉じる</small></summary><p class="letter-body">${letter.text}</p></details>`).join('')}</div>` : `
       <span class="birthday-envelope" aria-hidden="true">✉</span>
-      <button class="birthday-message-open" type="button">メッセージを開く</button>
+      <button class="birthday-message-open" type="button">メッセージを開く</button>`}
     </div>
     <div class="birthday-finale" hidden aria-live="polite">
       <p>HAPPY BIRTHDAY!</p>
@@ -180,7 +189,7 @@ const initBirthdayEvent = member => {
     setTimeout(() => mail.scrollIntoView({behavior: 'smooth', block: 'center'}), 280);
   };
 
-  messageButton.addEventListener('click', () => {
+  messageButton?.addEventListener('click', () => {
     event.classList.add('is-message-open');
     messageButton.hidden = true;
     finale.hidden = false;
@@ -241,3 +250,4 @@ function route() {
 
 addEventListener('hashchange', route);
 route();
+

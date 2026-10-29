@@ -1481,3 +1481,31 @@ footer {
     transition: none !important;
   }
 }
+
+
+/* Rukapinopi's original cake and individual birthday letters */
+.cake-wrap.cake-ruka{display:block;width:min(100%,620px);height:auto;aspect-ratio:1;margin: -12% auto 0;}
+.cake-ruka .ruka-cake-image{display:block;width:100%;height:100%;object-fit:contain;}
+.cake-ruka>.cake-top,.cake-ruka>.cake-layer,.cake-ruka>.cake-plate{display:none;}
+.cake-ruka .cake-candles{inset:0;width:100%;height:100%;display:block;}
+.cake-ruka .birthday-candle{position:absolute;width:14%;height:20%;left:30.4%;top:29.9%;}
+.cake-ruka .birthday-candle:nth-child(2){left:43%;top:25.9%;}
+.cake-ruka .birthday-candle:nth-child(3){left:55.6%;top:29.9%;}
+.cake-ruka .candle-stick{display:none;}
+.cake-ruka .candle-flame{left:calc(50% - 9px);top:calc(30% - 30px);bottom:auto;}
+.cake-ruka .candle-smoke{left:calc(50% - 6px);top:15%;bottom:auto;}
+.cake-ruka .birthday-candle:focus-visible{outline:3px solid #3864a2;}
+.birthday-mail.birthday-letters{width:min(100%,1000px);padding:clamp(18px,4vw,42px);}
+.letters-title{font-size:clamp(32px,6vw,76px);line-height:1;letter-spacing:-.05em;margin:0;color:#b52620;}
+.letters-recipient{font-size:24px;font-weight:900;margin:18px 0;}
+.letters-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;margin-top:30px;align-items:start;}
+.member-letter{min-width:0;border:2px solid var(--ink);background:#fffaf0;box-shadow:5px 5px var(--sender);animation:birthdayCardOpen .5s var(--arrival) both;}
+.member-letter summary{cursor:pointer;padding:20px 12px;list-style:none;display:grid;gap:10px;justify-items:center;background:color-mix(in srgb,var(--sender) 15%,white);}
+.member-letter summary::-webkit-details-marker{display:none;}
+.member-letter summary:focus-visible{outline:3px solid #3864a2;outline-offset:3px;}
+.letter-envelope{font-size:62px;color:var(--sender);line-height:1;transition:transform .25s;}
+.member-letter[open] .letter-envelope{transform:rotate(-10deg) translateY(-4px);}
+.member-letter small{font-size:11px;}
+.letter-body{white-space:pre-line;overflow-wrap:anywhere;text-align:left;line-height:1.9;font-weight:700;padding:22px 18px;margin:0;border-top:2px dashed var(--sender);animation:birthdayCardOpen .3s both;}
+@media(max-width:700px){.letters-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}}
+@media(max-width:420px){.letters-grid{grid-template-columns:1fr;}.member-letter summary{grid-template-columns:60px 1fr;padding:14px;}.member-letter small{grid-column:2;}.letter-envelope{grid-row:1/3;font-size:52px;}}
