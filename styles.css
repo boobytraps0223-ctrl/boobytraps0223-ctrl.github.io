@@ -1509,3 +1509,39 @@ footer {
 .letter-body{white-space:pre-line;overflow-wrap:anywhere;text-align:left;line-height:1.9;font-weight:700;padding:22px 18px;margin:0;border-top:2px dashed var(--sender);animation:birthdayCardOpen .3s both;}
 @media(max-width:700px){.letters-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:16px;}}
 @media(max-width:420px){.letters-grid{grid-template-columns:1fr;}.member-letter summary{grid-template-columns:60px 1fr;padding:14px;}.member-letter small{grid-column:2;}.letter-envelope{grid-row:1/3;font-size:52px;}}
+
+
+
+/* Kuroyan: CSS-only orange cream cake and owl topper. */
+.birthday-kuroyan .letters-title { color: #9b4800; }
+.cake-kuroyan .cake-layer { background: linear-gradient(#fff9e9 0 26%, #ffc77c 26% 48%, #fff9e9 48% 60%, #f3ab55 60%); box-shadow: inset 0 -12px #df8c36; }
+.cake-kuroyan .cake-top { background: #fffaf0; box-shadow: 0 8px #fffaf0; }
+.cake-kuroyan .cake-top span { background: #ff993c; }
+.cake-kuroyan .cake-layer-top::before { content: ''; position: absolute; top: 0; left: -2px; right: -2px; height: 30px; border-radius: 22px 22px 45% 35%; background: #fffaf0; }
+.cake-kuroyan .cake-nameplate { position: absolute; z-index: 5; bottom: 61px; padding: 9px 18px; border: 2px solid #211b17; border-radius: 9px; color: #fff4d6; background: #503126; font-size: clamp(16px, 3vw, 25px); font-weight: 900; letter-spacing: .13em; transform: rotate(-4deg); }
+.cake-kuroyan .cake-owl { position: absolute; z-index: 7; width: 76px; height: 83px; bottom: 248px; left: calc(50% - 38px); border: 3px solid #38281f; border-radius: 35% 35% 46% 46%; background: #b7763f; box-shadow: inset 0 -23px #eac899; pointer-events: none; }
+.cake-owl::before, .cake-owl::after { content: ''; position: absolute; top: -13px; width: 23px; height: 28px; background: #b7763f; border: 3px solid #38281f; z-index: -1; }
+.cake-owl::before { left: -2px; border-radius: 0 90% 0 0; transform: rotate(-12deg); }
+.cake-owl::after { right: -2px; border-radius: 90% 0 0 0; transform: rotate(12deg); }
+.owl-eyes::before, .owl-eyes::after { content: ''; position: absolute; top: 13px; width: 28px; height: 31px; border-radius: 50%; background: radial-gradient(circle, #281c15 0 4px, #fff8df 5px); }
+.owl-eyes::before { left: 4px; }
+.owl-eyes::after { right: 4px; }
+.owl-beak { position: absolute; top: 36px; left: 28px; width: 13px; height: 13px; border-radius: 2px; background: #ffb828; transform: rotate(45deg); }
+.cake-kuroyan .birthday-candle:nth-child(2) { transform: translateY(-92px); }
+.cake-kuroyan .birthday-candle:focus-visible { outline: 3px solid #3864a2; }
+.kuroyan-birthday-banner { display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 20px; padding: 24px 5vw; border-block: 2px solid var(--ink); background: #F79428; color: var(--ink); }
+.kuroyan-birthday-banner span, .kuroyan-birthday-banner b { font-size: 12px; font-weight: 900; }
+.kuroyan-birthday-banner strong { font-size: clamp(18px, 2.4vw, 28px); }
+.kuroyan-birthday-banner:hover { background: #ffb75f; }
+@media(max-width:700px) { .kuroyan-birthday-banner { grid-template-columns: 1fr; gap: 10px; } }
+@media(max-width:560px) {
+  .cake-kuroyan .cake-top { bottom: 214px; }
+  .cake-kuroyan .cake-candles { bottom: 245px; }
+  .cake-wrap.cake-kuroyan { height: 420px; width: 100%; margin-left: auto; }
+  .cake-kuroyan .cake-owl { width: 64px; height: 76px; left: calc(50% - 32px); }
+  .cake-kuroyan .owl-eyes::before, .cake-kuroyan .owl-eyes::after { width: 24px; }
+  .cake-kuroyan .owl-eyes::before { left: 2px; }
+  .cake-kuroyan .owl-eyes::after { right: 2px; }
+  .cake-kuroyan .owl-beak { left: 23px; }
+  .cake-kuroyan .cake-nameplate { padding: 9px 12px; }
+}

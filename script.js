@@ -73,9 +73,15 @@ const rukaLetters = [
   {name:'黒ヤン', color:'#F79428', text:'今日の主役は…君だ！！'},
   {name:'おらんじ〜な', color:'#CC4F33', text:'素敵な一年にするんだよ〜！'}
 ];
+const kuroyanLetters = [
+  {name:'ふまふま。', color:'#7baa17', text:'お凛ちゃんを世界に轟かせろ🎂🎉🎊'},
+  {name:'ぽけぷりん', color:'#FFE500', text:'お凛ちゃんとおいしいものいーーーーーーーーーぱい食べてください！'},
+  {name:'おらんじ～な', color:'#CC4F33', text:'お凛ちゃんとハッピーに暮らしてね'}
+];
 const birthdaySection = member => {
   if (!isBirthdayEventDay(member)) return '';
-  return `<section class="birthday-event" aria-labelledby="birthday-title">
+  const letters = member.slug === 'kuroyan' ? kuroyanLetters : member.slug === 'ruka' ? rukaLetters : null;
+  return `<section class="birthday-event birthday-${member.slug}" aria-labelledby="birthday-title">
     <div class="birthday-intro" aria-hidden="true">
       <div class="birthday-intro-spotlight"></div>
       <div class="birthday-intro-copy">
@@ -98,8 +104,9 @@ const birthdaySection = member => {
         <h3 class="birthday-prompt">ろうそくをタップしてね！</h3>
         <p>3本のろうそくを、ひとつずつ消してお祝いしよう。</p>
       </div>
-      <div class="cake-wrap ${member.slug === 'ruka' ? 'cake-ruka' : ''}" aria-label="${member.name}の誕生日ケーキ">
+      <div class="cake-wrap ${member.slug === 'ruka' ? 'cake-ruka' : member.slug === 'kuroyan' ? 'cake-kuroyan' : ''}" aria-label="${member.name}の誕生日ケーキ">
         ${member.slug === 'ruka' ? '<img class="ruka-cake-image" src="assets/ruka-birthday-cake.png" alt="RUKAPINOPIの名前入りケーキ">' : ''}
+        ${member.slug === 'kuroyan' ? '<div class="cake-owl" aria-hidden="true"><span class="owl-eyes"></span><span class="owl-beak"></span></div><span class="cake-nameplate">KUROYAN</span>' : ''}
         <div class="cake-candles">
           ${[1,2,3].map(number => `<button class="birthday-candle" type="button" aria-label="${number}本目のろうそくを消す">
             <span class="candle-smoke" aria-hidden="true"></span>
@@ -113,8 +120,8 @@ const birthdaySection = member => {
         <div class="cake-plate"></div>
       </div>
     </div>
-    <div class="birthday-mail ${member.slug === 'ruka' ? 'birthday-letters' : ''}" hidden>
-      ${member.slug === 'ruka' ? `<h3 class="letters-title">HAPPY BIRTHDAY!</h3><p class="letters-recipient">るかぴのぴへ</p><p>メンバーから手紙が届いたよ！<br>封筒をタップして開けてね。</p><div class="letters-grid">${rukaLetters.map((letter, index) => `<details class="member-letter" style="--sender:${letter.color};--arrival:${index * .12}s"><summary><span class="letter-envelope" aria-hidden="true">✉</span><strong>${letter.name}</strong><small>手紙を開く / 閉じる</small></summary><p class="letter-body">${letter.text}</p></details>`).join('')}</div>` : `
+    <div class="birthday-mail ${letters ? 'birthday-letters' : ''}" hidden>
+      ${letters ? `<h3 class="letters-title">HAPPY BIRTHDAY!</h3><p class="letters-recipient">${member.name}へ</p><p>メンバーから手紙が届いたよ！<br>封筒をタップして開けてね。</p><div class="letters-grid">${letters.map((letter, index) => `<details class="member-letter" style="--sender:${letter.color};--arrival:${index * .12}s"><summary><span class="letter-envelope" aria-hidden="true">✉</span><strong>${letter.name}</strong><small>手紙を開く / 閉じる</small></summary><p class="letter-body">${letter.text}</p></details>`).join('')}</div>` : `
       <span class="birthday-envelope" aria-hidden="true">✉</span>
       <button class="birthday-message-open" type="button">メッセージを開く</button>`}
     </div>
@@ -225,6 +232,15 @@ const moviesSection = m => {
   return `<section class="profile-movies"><div class="title-row"><div><p class="section-label">${m.roman} — MOVIES</p><h2>WATCH<br>THE LATEST.</h2></div>${m.youtube ? `<a href="${m.youtube}" target="_blank" rel="noreferrer">YouTubeですべて見る ↗</a>` : ''}</div><div class="video-grid movie-count-${cards.length}">${content}</div></section>`;
 };
 
+const kuroyan = members.find(member => member.slug === 'kuroyan');
+if (isBirthdayEventDay(kuroyan)) {
+  const banner = document.createElement('a');
+  banner.className = 'kuroyan-birthday-banner';
+  banner.href = '#member/kuroyan';
+  banner.innerHTML = '<span>11.13 · HAPPY BIRTHDAY</span><strong>黒ヤンのお誕生日をお祝いしよう！</strong><b>ケーキのろうそくを消しにいく →</b>';
+  document.querySelector('#pickup').before(banner);
+}
+
 document.querySelector('#memberGrid').innerHTML = members.map(m => `<a class="member-card" href="#member/${m.slug}" style="--member:${m.color}">${character(m)}<div class="member-name"><b>${m.name}</b><small>${m.roman}</small><i>↗</i></div></a>`).join('');
 
 function route() {
@@ -250,4 +266,5 @@ function route() {
 
 addEventListener('hashchange', route);
 route();
+
 
