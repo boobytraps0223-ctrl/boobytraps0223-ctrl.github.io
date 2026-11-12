@@ -76,7 +76,8 @@ const rukaLetters = [
 const kuroyanLetters = [
   {name:'ふまふま。', color:'#7baa17', text:'お凛ちゃんを世界に轟かせろ🎂🎉🎊'},
   {name:'ぽけぷりん', color:'#FFE500', text:'お凛ちゃんとおいしいものいーーーーーーーーーぱい食べてください！'},
-  {name:'おらんじ～な', color:'#CC4F33', text:'お凛ちゃんとハッピーに暮らしてね'}
+  {name:'おらんじ～な', color:'#CC4F33', text:'お凛ちゃんとハッピーに暮らしてね'},
+  {name:'るかぴのぴ。', color:'#e23d28', text:'いつも頼りにさせてもらってます！黒ヤンさんのイラストの世界観大好きです！'}
 ];
 const birthdaySection = member => {
   if (!isBirthdayEventDay(member)) return '';
